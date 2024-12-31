@@ -9,7 +9,7 @@ def emotion_detection_route():
 
     response = emotion_detector(text_to_analyse)
 
-    return response['anger']
+    return "For the given statement, the system response is 'anger': " + str(response['anger']) + ", 'disgust': " + str(response['disgust']) + ", 'fear': " + str(response['fear']) + ", joy: " + str(response['joy']) + " and sadness: " + str(response['sadness']) + ". The dominant emotion is: " + str(response['dominant emotion']) + "."
 
 @app.route("/")
 def render_index_page():
