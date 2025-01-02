@@ -7,10 +7,21 @@ def emotion_detector(text_to_analyse):
     response = requests.post(url, json = myobj, headers = header)
     formatted_response = json.loads(response.text)
 
+
     if "emotionPredictions" in formatted_response and len(formatted_response["emotionPredictions"]) > 0:
         emotion_data = formatted_response["emotionPredictions"][0].get("emotion", {})
     else:
-        raise ValueError("Invalid response structure: 'emotionPredictions' is missing or empty")
+        response = {
+            "status_code": response.status_code,
+            "anger": None,
+            "disgust": None,
+            "fear": None,
+            "joy": None,
+            "sadness": None,
+            "dominant_emotion": None,
+        }
+        return response
+    
 
     emotions = {
         "anger": emotion_data.get("anger",0),
